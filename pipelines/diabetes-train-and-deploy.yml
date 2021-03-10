@@ -59,7 +59,7 @@ steps:
     workingDirectory: $(ml-path)
     scriptLocation: inlineScript
     scriptType: 'bash'
-    inlineScript: 'az ml model register -n diabetes-qa-aci  -f run.json --asset-path outputs/ridge_0.95.pkl -t model.json'
+    inlineScript: 'az ml model register -n diabetes-model -f run.json --asset-path outputs/ridge_0.95.pkl -t model.json'
 
 - task: AzureCLI@2
   displayName: 'PAckage model '
@@ -68,7 +68,7 @@ steps:
     workingDirectory: $(ml-path)
     scriptLocation: inlineScript
     scriptType: 'bash'
-    inlineScript: 'az ml model package --in diabetes-qa-aci -f model.json --ic config/inference-config.yml'
+    inlineScript: 'az ml model package --in diabetes-model -f model.json --ic config/inference-config.yml'
 
 
 - task: AzureCLI@2
