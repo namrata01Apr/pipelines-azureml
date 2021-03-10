@@ -68,7 +68,7 @@ steps:
     workingDirectory: $(ml-path)
     scriptLocation: inlineScript
     scriptType: 'bash'
-    inlineScript: 'az ml model package --in $(ml-model-name) -f model.json --ic config/inference-config.yml'
+    inlineScript: 'az ml model package --in diabetes-qa-aci -f model.json --ic config/inference-config.yml'
 
 
 - task: AzureCLI@2
