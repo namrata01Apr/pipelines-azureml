@@ -53,23 +53,23 @@ steps:
 # Add potential approval step before registration of model
 
 - task: AzureCLI@2
-  displayName: 'PAckage model '
-  inputs:
-    azureSubscription: $(ml-ws-connection)
-    workingDirectory: $(ml-path)
-    scriptLocation: inlineScript
-    scriptType: 'bash'
-    inlineScript: 'az ml model package --in $(ml-model-name) -f model.json --ic config/inference-config.yml -w TestAML'
-
-
-- task: AzureCLI@2
   displayName: 'Register model'
   inputs:
     azureSubscription: $(ml-ws-connection)
     workingDirectory: $(ml-path)
     scriptLocation: inlineScript
     scriptType: 'bash'
-    inlineScript: 'az ml model register -n $(ml-model-name) -f run.json --asset-path outputs/ridge_0.95.pkl -t model.json'
+    inlineScript: 'az ml model register -n diabetes-qa-aci  -f run.json --asset-path outputs/ridge_0.95.pkl -t model.json'
+
+- task: AzureCLI@2
+  displayName: 'PAckage model '
+  inputs:
+    azureSubscription: $(ml-ws-connection)
+    workingDirectory: $(ml-path)
+    scriptLocation: inlineScript
+    scriptType: 'bash'
+    inlineScript: 'az ml model package --in $(ml-model-name) -f model.json --ic config/inference-config.yml --overwrite'
+
 
 - task: AzureCLI@2
   displayName: 'Deploy model to ACI for QA'
