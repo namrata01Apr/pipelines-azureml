@@ -68,7 +68,7 @@ steps:
     workingDirectory: $(ml-path)
     scriptLocation: inlineScript
     scriptType: 'bash'
-    inlineScript: 'az ml model package --in $(ml-model-name) -f model.json --ic config/inference-config.yml --overwrite'
+    inlineScript: 'az ml model package --in $(ml-model-name) -f model.json --ic config/inference-config.yml'
 
 
 - task: AzureCLI@2
